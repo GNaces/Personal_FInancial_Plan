@@ -43,3 +43,14 @@ class FinancialTracker:
         self.income = amount
         self.worksheet.update('A2', self.income)
 
+    def add_expense(self, description, amount, category):
+        """
+        Determines whether the cost is negative and raises an error if it is.
+        Provides the description, amount, and category of the item
+        adds a new row to a worksheet (self.worksheet) with the expense details.
+        """
+        if amount < 0:
+            raise ValueError("Expense amount cannot be less than 0.")
+        self.expenses.append({"description": description, "amount": amount, "category": category})
+        self.worksheet.append_row(['', description, amount, category])
+
