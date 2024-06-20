@@ -1,3 +1,5 @@
+import json
+
 # In order to access and change data on a spreadsheet, import the gspread library.
 import gspread
 
@@ -64,7 +66,7 @@ class FinancialTracker:
         """
         Calculates the remaining balance by subtracting total expenses from income.
         """
-        return self.income - self.calculate_total_expenses()
+        return self.income - self.total_expenses()
     
     def display_summary(self):
         """
@@ -78,3 +80,8 @@ class FinancialTracker:
             print(f" - {expense['description']} ({expense['category']}): ${expense['amount']:.2f}")
         print(f"Total Expenses: ${self.total_expenses():.2f}")
         print(f"Remaining Balance: ${self.calculate_remaining_balance():.2f}")
+    
+    def save_data_to_file(self, filename):
+        with open(filename, 'w') as file:
+            json.dump({"income": self.income, "expenses": self.expenses}, file)
+        print(f"Data saved to {filename}")
