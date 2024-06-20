@@ -116,6 +116,38 @@ def main():
     """
     sheet = SHEET
     tracker = FinancialTracker(sheet)
-    
+
     # This line calls the load_data_from_file method of the tracker object to load any existing budget data from a file named budget_data.json
     tracker.load_data_from_file("budget_data.json")
+
+    # Set the monthly income
+    while True:
+        try:
+            income = float(input("Enter your total monthly income: $"))
+            tracker.set_income(income)
+            break
+        except ValueError as e:
+            print(e)
+    
+      # Add expenses
+    while True:
+        description = input("Enter expense description (or 'done' to finish): ")
+        if description.lower() == 'done':
+            break
+        category = input("Enter expense category: ")
+        while True:
+            try:
+                amount = float(input(f"Enter amount for {description}: $"))
+                tracker.add_expense(description, amount, category)
+                break
+            except ValueError:
+                print("Please enter a valid number.")
+
+    # Display the budget summary
+    tracker.display_summary()
+
+    # Save data to a file
+    tracker.save_data_to_file("budget_data.json")
+
+if __name__ == "__main__":
+    main()
