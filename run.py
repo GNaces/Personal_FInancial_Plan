@@ -33,6 +33,21 @@ class FinancialTracker:
         self.expenses = []
         self.worksheet = worksheet
         self.load_from_sheet()
+    
+    def load_data_from_file(self, filename):
+        """
+        This method is useful for initializing a BudgetTracker instance with previously saved financial data from a file, 
+        allowing the program to continue working with previously entered income and expense data. 
+        The exception handling ensures that the program does not crash if the specified file is missing.
+        """
+        try:
+            with open(filename, 'r') as file:
+                data = json.load(file)
+                self.income = data["income"]
+                self.expenses = data["expenses"]
+            print(f"Data loaded from {filename}")
+        except FileNotFoundError:
+            print(f"No file found named {filename}")
 
     def set_income(self, amount):
         """
@@ -40,10 +55,15 @@ class FinancialTracker:
         A ValueError with the message "Income cannot be less than 0" is raised if the amount is negative. 
         This guarantees that there is no way to set the revenue to a negative amount.
         """
+    try:
         if amount < 0:
             raise ValueError("Income cannot be less than 0.")
         self.income = amount
         self.worksheet.update('A2', self.income)
+    except gspread.exceptions.APIError as e:
+        print(f"Error updating Google Sheet: {e}")
+    except ValueError as ve:
+        print(ve)
 
     def add_expense(self, description, amount, category):
         """
@@ -90,19 +110,9 @@ class FinancialTracker:
             json.dump({"income": self.income, "expenses": self.expenses}, file)
         print(f"Data saved to {filename}")
 
-    def load_data_from_file(self, filename):
-        """
-        This method is useful for initializing a BudgetTracker instance with previously saved financial data from a file, 
-        allowing the program to continue working with previously entered income and expense data. 
-        The exception handling ensures that the program does not crash if the specified file is missing.
-        """
-        try:
-            with open(filename, 'r') as file:
-                data = json.load(file)
-                self.income = data["income"]
-                self.expenses = data["expenses"]
-            print(f"Data loaded from {filename}")
-        except FileNotFoundError:
-            print(f"No file found named {filename}")
-
-    
+def main():
+    """
+    This will contain the primary logic of the financial tracker.
+    """
+    sheet = SHEET
+    tracker = FinancialTracker(sheet)
