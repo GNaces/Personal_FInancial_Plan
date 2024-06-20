@@ -15,7 +15,7 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('Personal_Financial_Plan')
+SHEET = GSPREAD_CLIENT.open('Personal_Financial_Plan').sheet1
 
 
 class FinancialTracker:
@@ -65,4 +65,16 @@ class FinancialTracker:
         Calculates the remaining balance by subtracting total expenses from income.
         """
         return self.income - self.calculate_total_expenses()
-
+    
+    def display_summary(self):
+        """
+        It consists of total amount earned, a list of all the expenses, including information on the type, amount, and description of each expense.
+        Total cost, remaining amount following the subtraction of all costs from all revenue.
+        """
+        print("\n---- Monthly Personal Finances Summary ----")
+        print(f"Total Income: ${self.income:.2f}")
+        print("Expenses:")
+        for expense in self.expenses:
+            print(f" - {expense['description']} ({expense['category']}): ${expense['amount']:.2f}")
+        print(f"Total Expenses: ${self.total_expenses():.2f}")
+        print(f"Remaining Balance: ${self.calculate_remaining_balance():.2f}")
