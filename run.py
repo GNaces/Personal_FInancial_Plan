@@ -143,7 +143,7 @@ def main():
     tracker = FinancialTracker(sheet)
 
     # This line calls the load_data_from_file method of the tracker object to load any existing budget data from a file named Personal Financial Plan
-    tracker.load_data_from_file("sheet")
+    tracker.load_data_from_file("Personal Financial worksheet")
 
     # Set the monthly income
     while True:
@@ -162,7 +162,7 @@ def main():
         category = input("\nEnter expense category: \n")
         while True:
             try:
-                amount = float(input(f"Enter amount for {description}: £\n"))
+                amount = float(input(f"\nEnter amount for {description}: £\n"))
                 tracker.add_expense(description, amount, category)
                 break
             except ValueError:
@@ -172,7 +172,7 @@ def main():
     tracker.display_summary()
 
     # Save data to a file
-    tracker.save_data_to_file("sheet")
+    tracker.save_data_to_file("Personal Financial worksheet")
 
 if __name__ == "__main__":
     main()
