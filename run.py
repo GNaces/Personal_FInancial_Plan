@@ -80,11 +80,15 @@ class FinancialTracker:
         A ValueError with the message "Income cannot be less than 0" is raised if the amount is negative. 
         This guarantees that there is no way to set the revenue to a negative amount.
         """
-        def set_income(self, amount):
+        try:
             if amount < 0:
                 raise ValueError("Income cannot be negative.")
             self.income = amount
-            self.sheet.update('A2', self.income)
+            self.worksheet.update('A2', [[self.income]])  # Update expects a list of lists
+        except gspread.exceptions.APIError as e:
+            print(f"Error updating Google Sheet: {e}")
+        except ValueError as ve:
+            print(ve)
 
     def add_expense(self, description, amount, category):
         """
