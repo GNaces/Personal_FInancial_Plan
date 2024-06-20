@@ -65,8 +65,8 @@ class FinancialTracker:
                 self.income = data["income"]
                 self.expenses = data["expenses"]
             print(f"Data loaded from {filename}")
-        except FileNotFoundError:
-            print(f"No file found named {filename}. Creating a new one with default data.")
+        # except FileNotFoundError:
+        #     print(f"No file found named {filename}. Creating a new one with default data.")
 
             # Create the file with default data if it does not exist, error solve using hosted ChatGPT.
             self.save_data_to_file(filename)
