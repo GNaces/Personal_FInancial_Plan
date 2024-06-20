@@ -51,7 +51,7 @@ class FinancialTracker:
             self.expenses = [record for record in expenses_records if record.get('description')]
             print("Welcome to your Personal Budget Plan")
         except (gspread.exceptions.APIError, ValueError) as e:
-            print(f"Error loading data from Google Sheet: {e}")
+            print(f"Clear Income of: {e}")
 
     def load_data_from_file(self, filename):
         """
