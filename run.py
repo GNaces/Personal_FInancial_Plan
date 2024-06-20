@@ -34,9 +34,22 @@ class FinancialTracker:
         self.worksheet = worksheet
         self.load_from_sheet()
     
+    def load_from_sheet(self):
+        """
+        This method is useful for initializing a FinancialTracker instance with previously saved financial data from a Google Sheet, 
+        allowing the program to continue working with previously entered income and expense data.
+        """
+        try:
+            self.income = float(self.worksheet.acell('A2').value)
+            expenses_records = self.worksheet.get_all_records()[1:]  # Assuming first record is income
+            self.expenses = expenses_records
+            print(f"Data loaded from Google Sheet")
+        except (gspread.exceptions.APIError, ValueError) as e:
+            print(f"Error loading data from Google Sheet: {e}")
+
     def load_data_from_file(self, filename):
         """
-        This method is useful for initializing a BudgetTracker instance with previously saved financial data from a file, 
+        This method is useful for initializing a FinancialTracker instance with previously saved financial data from a file, 
         allowing the program to continue working with previously entered income and expense data. 
         The exception handling ensures that the program does not crash if the specified file is missing.
         """
@@ -55,15 +68,15 @@ class FinancialTracker:
         A ValueError with the message "Income cannot be less than 0" is raised if the amount is negative. 
         This guarantees that there is no way to set the revenue to a negative amount.
         """
-    try:
-        if amount < 0:
-            raise ValueError("Income cannot be less than 0.")
-        self.income = amount
-        self.worksheet.update('A2', self.income)
-    except gspread.exceptions.APIError as e:
-        print(f"Error updating Google Sheet: {e}")
-    except ValueError as ve:
-        print(ve)
+        try:
+            if amount < 0:
+                raise ValueError("Income cannot be less than 0.")
+            self.income = amount
+            self.worksheet.update('A2', self.income)
+        except gspread.exceptions.APIError as e:
+            print(f"Error updating Google Sheet: {e}")
+        except ValueError as ve:
+            print(ve)
 
     def add_expense(self, description, amount, category):
         """
@@ -103,7 +116,7 @@ class FinancialTracker:
     
     def save_data_to_file(self, filename):
         """
-        This approach is handy for saving financial data to a file in JSON format, which ca then be loaded back into the program as needed.
+        This approach is handy for saving financial data to a file in JSON format, which can then be loaded back into the program as needed.
         The exception handling ensures that all potential file operation problems are handled gracefully and reported.
         """
         with open(filename, 'w') as file:
@@ -129,7 +142,7 @@ def main():
         except ValueError as e:
             print(e)
     
-      # Add expenses
+    # Add expenses
     while True:
         description = input("Enter expense description (or 'done' to finish): ")
         if description.lower() == 'done':
