@@ -156,10 +156,10 @@ def main():
     
     # Add expenses
     while True:
-        description = input("Enter expense description (or 'done' to finish): \n")
+        description = input("\nEnter expense description (or 'done' to finish): \n")
         if description.lower() == 'done':
             break
-        category = input("Enter expense category: \n")
+        category = input("\nEnter expense category: \n")
         while True:
             try:
                 amount = float(input(f"Enter amount for {description}: $\n"))
