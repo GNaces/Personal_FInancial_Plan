@@ -16,8 +16,18 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Personal_Financial_Plan')
 
-worksheet = SHEET.worksheet('worksheet')
+class FinancialTracker:
+    """
+    This class contains all of the logic needed to manage a financial tracker, including how to set income, 
+    add expenses, compute totals, and work with a worksheet.
+    """
+    def __init__(self, worksheet):
+        """
+        It gets triggered whenever a new class instance is made. Along with 'self', it requires one parameter 'worksheet'.
+        """
+        self.income = 0
+        self.expenses = []
+        self.worksheet = worksheet
+        self.load_data_from_worksheet()
 
-data = worksheet.get_all_values()
 
-print(data)
