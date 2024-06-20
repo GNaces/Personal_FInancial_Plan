@@ -40,10 +40,16 @@ class FinancialTracker:
         allowing the program to continue working with previously entered income and expense data.
         """
         try:
-            self.income = float(self.worksheet.acell('A2').value)
-            expenses_records = self.worksheet.get_all_records()[1:]  # Assuming first record is income
-            self.expenses = expenses_records
-            print(f"Data loaded from Google Sheet")
+            income_value = self.worksheet.acell('A2').value
+            if income_value is not None:
+                self.income = float(income_value)
+            else:
+                self.income = 0
+
+            expenses_records = self.worksheet.get_all_records()
+            # Skip the header row and any other non-expense rows
+            self.expenses = [record for record in expenses_records if record.get('description')]
+            print("Data loaded from Google Sheet")
         except (gspread.exceptions.APIError, ValueError) as e:
             print(f"Error loading data from Google Sheet: {e}")
 
