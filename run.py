@@ -68,6 +68,12 @@ class FinancialTracker:
         except FileNotFoundError:
             print(f"No file found named {filename}")
 
+            # Create the file with default data if it does not exist
+            self.save_data_to_file(filename)
+        except json.JSONDecodeError:
+            print(f"File {filename} contains invalid JSON. Initializing with default values.")
+            self.save_data_to_file(filename)
+
     def set_income(self, amount):
         """
         The process determines whether the amount passed is less than zero.
