@@ -60,3 +60,9 @@ class FinancialTracker:
         """
         return sum(expense["amount"] for expense in self.expenses)
 
+    def calculate_remaining_balance(self):
+        """
+        Calculates the remaining balance by subtracting total expenses from income.
+        """
+        return self.income - self.calculate_total_expenses()
+
