@@ -84,7 +84,7 @@ class FinancialTracker:
             if amount < 0:
                 raise ValueError("Income cannot be negative.")
             self.income = amount
-            self.worksheet.update('A2', [[self.income]])  # Update expects a list of lists
+            self.worksheet.update(range_name='A2', values=[[self.income]])
         except gspread.exceptions.APIError as e:
             print(f"Error updating Google Sheet: {e}")
         except ValueError as ve:
