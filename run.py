@@ -143,7 +143,7 @@ def main():
     tracker = FinancialTracker(sheet)
 
     # This line calls the load_data_from_file method of the tracker object to load any existing budget data from a file named Personal Financial Plan
-    tracker.load_data_from_file("Personal_Financial_Plan")
+    tracker.load_data_from_file("Personal_Financial_Plan.json")
 
     # Set the monthly income
     while True:
@@ -172,7 +172,7 @@ def main():
     tracker.display_summary()
 
     # Save data to a file
-    tracker.save_data_to_file("Personal_Financial_Plan")
+    tracker.save_data_to_file("Personal_Financial_Plan.json")
 
 if __name__ == "__main__":
     main()
