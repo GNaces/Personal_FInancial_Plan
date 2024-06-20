@@ -16,8 +16,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Personal_Financial_Plan')
 
-summary = SHEET.worksheet('summary')
+worksheet = SHEET.worksheet('worksheet')
 
-data = summary.get_all_values()
+data = worksheet.get_all_values()
 
 print(data)
