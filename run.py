@@ -82,6 +82,27 @@ class FinancialTracker:
         print(f"Remaining Balance: ${self.calculate_remaining_balance():.2f}")
     
     def save_data_to_file(self, filename):
+        """
+        This approach is handy for saving financial data to a file in JSON format, which ca then be loaded back into the program as needed.
+        The exception handling ensures that all potential file operation problems are handled gracefully and reported.
+        """
         with open(filename, 'w') as file:
             json.dump({"income": self.income, "expenses": self.expenses}, file)
         print(f"Data saved to {filename}")
+
+    def load_data_from_file(self, filename):
+        """
+        This method is useful for initializing a BudgetTracker instance with previously saved financial data from a file, 
+        allowing the program to continue working with previously entered income and expense data. 
+        The exception handling ensures that the program does not crash if the specified file is missing.
+        """
+        try:
+            with open(filename, 'r') as file:
+                data = json.load(file)
+                self.income = data["income"]
+                self.expenses = data["expenses"]
+            print(f"Data loaded from {filename}")
+        except FileNotFoundError:
+            print(f"No file found named {filename}")
+
+    
