@@ -9,12 +9,14 @@ SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
+# Authenticate and create the gspread client
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Personal_Financial_Plan')
+
 
 class FinancialTracker:
     """
@@ -28,6 +30,16 @@ class FinancialTracker:
         self.income = 0
         self.expenses = []
         self.worksheet = worksheet
-        self.load_data_from_worksheet()
+        self.load_from_sheet()
 
+    def set_income(self, amount):
+        """
+        The process determines whether the amount passed is less than zero.
+        A ValueError with the message "Income cannot be less than 0" is raised if the amount is negative. 
+        This guarantees that there is no way to set the revenue to a negative amount.
+        """
+        if amount < 0:
+            raise ValueError("Income cannot be less than 0.")
+        self.income = amount
+        self.worksheet.update('A2', self.income)
 
