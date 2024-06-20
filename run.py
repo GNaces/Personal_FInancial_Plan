@@ -49,7 +49,7 @@ class FinancialTracker:
             expenses_records = self.worksheet.get_all_records()
             # Skip the header row and any other non-expense rows
             self.expenses = [record for record in expenses_records if record.get('description')]
-            print("Data loaded from Google Sheet")
+            print("Welcome to your Personal Budget Plan")
         except (gspread.exceptions.APIError, ValueError) as e:
             print(f"Error loading data from Google Sheet: {e}")
 
@@ -142,8 +142,8 @@ def main():
     sheet = SHEET
     tracker = FinancialTracker(sheet)
 
-    # This line calls the load_data_from_file method of the tracker object to load any existing budget data from a file named budget_data.json
-    tracker.load_data_from_file("budget_data.json")
+    # This line calls the load_data_from_file method of the tracker object to load any existing budget data from a file named Personal Financial Plan Sheet
+    tracker.load_data_from_file("Personal Financial Plan Sheet")
 
     # Set the monthly income
     while True:
@@ -172,7 +172,7 @@ def main():
     tracker.display_summary()
 
     # Save data to a file
-    tracker.save_data_to_file("budget_data.json")
+    tracker.save_data_to_file("Personal Financial Plan Sheet")
 
 if __name__ == "__main__":
     main()
