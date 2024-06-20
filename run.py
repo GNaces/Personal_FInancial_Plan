@@ -54,3 +54,9 @@ class FinancialTracker:
         self.expenses.append({"description": description, "amount": amount, "category": category})
         self.worksheet.append_row(['', description, amount, category])
 
+    def total_expenses(self):
+        """
+        Computes the total expenses by summing the amounts of all expenses in the list.
+        """
+        return sum(expense["amount"] for expense in self.expenses)
+
