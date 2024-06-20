@@ -148,7 +148,7 @@ def main():
     # Set the monthly income
     while True:
         try:
-            income = float(input("\nEnter your total monthly income: $\n"))
+            income = float(input("\nEnter your total monthly income: £\n"))
             tracker.set_income(income)
             break
         except ValueError as e:
@@ -162,7 +162,7 @@ def main():
         category = input("\nEnter expense category: \n")
         while True:
             try:
-                amount = float(input(f"Enter amount for {description}: $\n"))
+                amount = float(input(f"Enter amount for {description}: £\n"))
                 tracker.add_expense(description, amount, category)
                 break
             except ValueError:
