@@ -116,3 +116,6 @@ def main():
     """
     sheet = SHEET
     tracker = FinancialTracker(sheet)
+    
+    # This line calls the load_data_from_file method of the tracker object to load any existing budget data from a file named budget_data.json
+    tracker.load_data_from_file("budget_data.json")
