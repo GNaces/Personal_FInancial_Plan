@@ -41,7 +41,7 @@ class FinancialTracker:
         """
         try:
             income_value = self.worksheet.acell('A2').value
-            if income_value is None:
+            if income_value is not None:
                 self.income = float(income_value)
             else:
                 self.income = 0
@@ -51,7 +51,7 @@ class FinancialTracker:
             self.expenses = [record for record in expenses_records if record.get('description')]
             print("Welcome to your Personal Budget Plan")
         except (gspread.exceptions.APIError, ValueError) as e:
-            print(f"Clear previous income {e}")
+            print(f"This is your previous income {e}")
 
     def load_data_from_file(self, filename):
         """
