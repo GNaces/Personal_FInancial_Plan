@@ -1,6 +1,6 @@
 import json
 
-# In order to access and change data on a spreadsheet, import the gspread library.
+# To access and change data on a spreadsheet, import the gspread library.
 import gspread
 
 # For authentication, import the Credentials class.
@@ -22,22 +22,21 @@ SHEET = GSPREAD_CLIENT.open('Personal_Financial_Plan').sheet1
 
 class FinancialTracker:
     """
-    This class contains all of the logic needed to manage a financial tracker, including how to set income, 
-    add expenses, compute totals, and work with a worksheet.
+    Manage tracker logic: set income, add expenses, compute totals, worksheets.
     """
     def __init__(self, worksheet):
         """
-        It gets triggered whenever a new class instance is made. Along with 'self', it requires one parameter 'worksheet'.
+        Trigger new instance; requires 'self' and one parameter 'worksheet'.
         """
         self.income = 0
         self.expenses = []
         self.worksheet = worksheet
         self.load_from_sheet()
-    
+
     def load_from_sheet(self):
         """
-        This method is useful for initializing a FinancialTracker instance with previously saved financial data from a Google Sheet, 
-        allowing the program to continue working with previously entered income and expense data.
+        Initializes FinancialTracker with saved data from a Google Sheet.
+        Continue work with previously entered income and expense data.
         """
         try:
             income_value = self.worksheet.acell('A2').value
@@ -55,9 +54,9 @@ class FinancialTracker:
 
     def load_data_from_file(self, filename):
         """
-        This method is useful for initializing a FinancialTracker instance with previously saved financial data from a file, 
-        allowing the program to continue working with previously entered income and expense data. 
-        The exception handling ensures that the program does not crash if the specified file is missing.
+        Initializes FinancialTracker with saved financial data from a file,
+        allows continued use of previously entered income and expense data,
+        ensures program doesn't crash if the specified file is missing.
         """
         try:
             with open(filename, 'r') as file:
@@ -68,17 +67,16 @@ class FinancialTracker:
         except FileNotFoundError:
             print(f"No data found in {filename}.")
 
-            # Create the file with default data if it does not exist, error solve using hosted ChatGPT.
             self.save_data_to_file(filename)
         except json.JSONDecodeError:
-            print(f"File {filename} contains invalid JSON. Initializing with default values.")
+            print(f"File {filename} contains invalid JSON. Initiate default.")
             self.save_data_to_file(filename)
 
     def set_income(self, amount):
         """
         The process determines whether the amount passed is less than zero.
-        A ValueError with the message "Income cannot be less than 0" is raised if the amount is negative. 
-        This guarantees that there is no way to set the revenue to a negative amount.
+        Raises "Income cannot be less than 0" for negative amounts.
+        Ensures revenue cannot be set to a negative amount.
         """
         try:
             if amount < 0:
@@ -93,30 +91,31 @@ class FinancialTracker:
     def add_expense(self, description, amount, category):
         """
         Determines whether the cost is negative and raises an error if it is.
-        Provides the description, amount, and category of the item
-        adds a new row to a worksheet (self.worksheet) with the expense details.
+        Provides the description, amount, and category of the item,
+        adds expense details to self.worksheet as a new row.
         """
         if amount < 0:
-            raise ValueError("Expense amount cannot be less than 0.")
+            raise ValueError("Expense cannot be negative.")
         self.expenses.append({"description": description, "amount": amount, "category": category})
         self.worksheet.append_row(['', description, amount, category])
 
     def total_expenses(self):
         """
-        Computes the total expenses by summing the amounts of all expenses in the list.
+        Computes total expenses by summing all amounts in the list.
         """
         return sum(expense["amount"] for expense in self.expenses)
 
     def calculate_remaining_balance(self):
         """
-        Calculates the remaining balance by subtracting total expenses from income.
+        Calculates remaining balance as income minus total expenses.
         """
         return self.income - self.total_expenses()
-    
+
     def display_summary(self):
         """
-        It consists of total amount earned, a list of all the expenses, including information on the type, amount, and description of each expense.
-        Total cost, remaining amount following the subtraction of all costs from all revenue.
+        Includes total earnings and a list of expenses
+        with type, amount, and description.
+        Total cost subtracted from revenue yields remaining amount.
         """
         print("\n---- Monthly Personal Finances Summary ----")
         print(f"Total Income: ${self.income:.2f}")
@@ -125,15 +124,16 @@ class FinancialTracker:
             print(f" - {expense['description']} ({expense['category']}): ${expense['amount']:.2f}")
         print(f"Total Expenses: ${self.total_expenses():.2f}")
         print(f"Remaining Balance: ${self.calculate_remaining_balance():.2f}")
-    
+
     def save_data_to_file(self, filename):
         """
-        This approach is handy for saving financial data to a file in JSON format, which can then be loaded back into the program as needed.
-        The exception handling ensures that all potential file operation problems are handled gracefully and reported.
+        Saves financial data to JSON file for future program loading.
+        Handles file operation issues gracefully with exception handling.
         """
         with open(filename, 'w') as file:
             json.dump({"income": self.income, "expenses": self.expenses}, file)
         print(f"Data saved to {filename}")
+
 
 def main():
     """
@@ -142,7 +142,9 @@ def main():
     sheet = SHEET
     tracker = FinancialTracker(sheet)
 
-    # This line calls the load_data_from_file method of the tracker object to load any existing budget data from a file named Personal Financial Plan
+    # This line calls the load_data_from_file method of the tracker object
+    # to load any existing budget data from a file named
+    # Personal Financial Plan
     tracker.load_data_from_file("Personal_Financial_Plan.json")
 
     # Set the monthly income
@@ -153,7 +155,7 @@ def main():
             break
         except ValueError as e:
             print(e)
-    
+
     # Add expenses
     while True:
         description = input("\nEnter expense description (or 'done' to finish): \n")
@@ -166,13 +168,14 @@ def main():
                 tracker.add_expense(description, amount, category)
                 break
             except ValueError:
-                print("Please enter a valid number.")
+                print("Expenses cannot be negative.")
 
     # Display the budget summary
     tracker.display_summary()
 
     # Save data to a file
     tracker.save_data_to_file("Personal_Financial_Plan.json")
+
 
 if __name__ == "__main__":
     main()
