@@ -120,3 +120,17 @@ I made use of Code Institutes "Love Sandwiches Walkthrough Project", "Getting Se
   17. After previewing the running application I went back to the previous page and toggled the "Enable Automatic Deploys" button so that the app would automatically update when a change is pushed to Github.
 
 Here is the live link [Personal Financial Plan](https://personal-monthly-financial-008cfb3b6e6c.herokuapp.com/)
+
+### Deployment Testing
+
+- Notice various error in selecting a file to load, I tailored the print statement inorder that the user will comprehend how the app works.
+- Had a unforseen issue in saving the Income amount in the worksheet, I added range name and a value for it to properly populate the data.
+- I ran multiple tests on how print statements appear on the Code Institute Heroku terminal and adjusted to what I feel best for user experience, trying to keep the operation logical, simple, clean and easy to use.
+
+## Credits
+
+- First and foremost I would like to thank my mentor Anthony Ugwu for his valuable input.
+- Code institutes Course material was essential for setting up a workspace and deployment of the program on [Heroku](https://id.heroku.com/login).
+- I made use of [Lucidchart](https://www.lucidchart.com/pages/) to create the flow diagrams for the palnning of my project.
+- Credits to the [Love Sandwiches](https://github.com/GNaces/Love-sandwiches) for the very useful inputs on setting up my project.
+- I research a lot in all media including the aid of [ChatGPT](https://openai.com/blog/chatgpt/) to enhance my code and build a simple yet straight forward Personal Financial Plan project.
