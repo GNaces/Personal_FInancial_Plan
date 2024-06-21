@@ -76,4 +76,24 @@ I made use of Code Institutes "Love Sandwiches Walkthrough Project", "Getting Se
 
 ## Testing
 
-- 
+- Tested data_validator function with various data types and amounts of data provided:
+    - If the income amount is in negative value - ValueError is raised as intended.
+    - If the income amount is not valid - it will not be recorded/saved in the worksheet.
+    - If the expenses amount is in negative value - ValueError is raised as intended.
+    - If the expenses amount is in negative value - user will be promted to inter valid value.
+
+- Tested if program is updating the Google worksheet correctly - Working as intended.
+- I also made use of the Python type method in order to check types of data returned where needed.
+
+### Final Validator test
+
+- Final validation returns four (4) E501 line too long errors.
+    - Code description and structure are too long that it strikes the limit of 79 characters.
+    - Ask my mentor and said it will not post a major issue so I let it as is.
+
+![validation](assets/PIP3.png)
+
+### Unfixed Bugs
+
+- No bugs left unfixed.
+
