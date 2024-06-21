@@ -51,7 +51,7 @@ class FinancialTracker:
             self.expenses = [record for record in expenses_records if record.get('description')]
             print("Welcome to your Personal Budget Plan")
         except (gspread.exceptions.APIError, ValueError) as e:
-            print(f"This is your previous income {e}")
+            print(f"This is your previous income, {e}")
 
     def load_data_from_file(self, filename):
         """
