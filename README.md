@@ -1,32 +1,17 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Personal Financial Plan
 
-Welcome,
+Personal Financial Plan is a Python terminal application that runs on the Code Institute mock terminal on Heroku.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **May 14, 2024**
+It is an organized strategy to manage your funds on a monthly basis. Individuals who consistently adhere to a personal monthly financial plan can gain control of their finances, achieve their financial goals, and strive toward long-term financial security and independence.
 
-## Reminders
+Here is the live version of my project.
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+![screen_responsive](assets/Responsive.png)
 
-## Creating the Heroku app
+## Conception
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+- My initial step was to draw a flow diagram of my scope for the Personal Financial Plan concept.
 
-1. `heroku/python`
-2. `heroku/nodejs`
+- Here's an overview of the original concept.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
+![flow_chart](assets/Flow%20chart.png)
