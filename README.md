@@ -23,3 +23,57 @@ I made use of Code Institutes "Love Sandwiches Walkthrough Project", "Getting Se
  - [To activate API credentials](https://youtu.be/WTll5p4N7hE).
  - [Setup of Gitpod Workspace](https://youtu.be/3ikrLWM0QqU).
  - [Connecting to the API with Python](https://youtu.be/lPTKUiafTRY).
+
+## Features
+
+### Existing Features
+
+- When initializing the program, the user is dispalyed a welcome message.
+
+![welcome](assets/Home.png)
+
+- Set Income - allows user to input monthly income, enabling proper financial tracking and budget management. Users enter their income amount.
+
+![enter_income](assets/Enter%20Income.png)
+
+- Entered income amount will automatically appear and saved in the Personal Financial Plan Google worksheet.
+
+![income_saved](assets/Worksheet%20Income%20updated.png)
+
+- Whenever a negative income amount is entered, the user will be promted that "Income cannot be negative"
+
+![income_negative](assets/Income%20cannot%20be%20negative.png)
+
+- Add Expense Description - allows user to describe expenses in details.
+
+![enter_description](assets/Expense%20description.png)
+
+- Add Category - enable user to categorize expenses based on the nature of usage.
+
+![enter_category](assets/Expense%20Category.png)
+
+- Add Amount - user will define how much is spent on this category for the month.
+
+![enter_amount](assets/Expense%20Amount.png)
+
+- Whenever a negative expense amount is entered, the user will be promted that "Expenses cannot be negative"
+
+![expenses_negative](assets/Expense%20cannot%20be%20negative.png)
+
+- After the user is satisfied entering all the expenses needed to be considered, user will enter 'done' to finish the process. Then a summary of Monthly Personal Finances will be printed in the screen.
+
+![done_print_summary](assets/done%20and%20print%20summary.png)
+
+- When all data is entered, subsequently all data entered will be saved in the Personal Financial Plan Google Spreadsheet.
+
+![all_saved](assets/Update%20google%20worksheet.png)
+
+### Future Features
+
+- Expand the code and incorporate the budgeted monthly income and expenses versus the actual monthly income and expenses.
+- Allow historical data to be retrived and new data stored for further future references.
+
+
+## Testing
+
+- 
