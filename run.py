@@ -52,6 +52,13 @@ class FinancialTracker:
         except (gspread.exceptions.APIError, ValueError) as e:
             print(f"This is your previous income, {e}")
 
+    def refresh_data(self):
+        """
+        Refreshes the data by reloading it from the Google Sheet.
+        """
+        self.load_from_sheet()
+        print("Data refreshed from the Google Sheet.")
+
     def load_data_from_file(self, filename):
         """
         Initializes FinancialTracker with saved financial data from a file,
@@ -118,12 +125,12 @@ class FinancialTracker:
         Total cost subtracted from revenue yields remaining amount.
         """
         print("\n---- Monthly Personal Finances Summary ----")
-        print(f"Total Income: ${self.income:.2f}")
+        print(f"Total Income: £{self.income:.2f}")
         print("Expenses:")
         for expense in self.expenses:
-            print(f" - {expense['description']} ({expense['category']}): ${expense['amount']:.2f}")
-        print(f"Total Expenses: ${self.total_expenses():.2f}")
-        print(f"Remaining Balance: ${self.calculate_remaining_balance():.2f}")
+            print(f" - {expense['description']} ({expense['category']}): £{expense['amount']:.2f}")
+        print(f"Total Expenses: £{self.total_expenses():.2f}")
+        print(f"Remaining Balance: £{self.calculate_remaining_balance():.2f}")
 
     def save_data_to_file(self, filename):
         """
@@ -141,6 +148,9 @@ def main():
     """
     sheet = SHEET
     tracker = FinancialTracker(sheet)
+
+    # Refresh the data from the Google Sheet at the start
+    tracker.refresh_data()
 
     # This line calls the load_data_from_file method of the tracker object
     # to load any existing budget data from a file named
