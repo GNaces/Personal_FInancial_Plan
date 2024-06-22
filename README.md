@@ -134,3 +134,4 @@ Here is the live link [Personal Financial Plan](https://personal-monthly-financi
 - I made use of [Lucidchart](https://www.lucidchart.com/pages/) to create the flow diagrams for the palnning of my project.
 - Credits to the [Love Sandwiches](https://github.com/GNaces/Love-sandwiches) for the very useful inputs on setting up my project.
 - I research a lot in all media including the aid of [ChatGPT](https://openai.com/blog/chatgpt/) to enhance my code and build a simple yet straight forward Personal Financial Plan project. Read all the inputs the it suggest and confirm it with the course material that I studed in this module as it is not always correct.
+- Credits to [Survey Data Processor](https://github.com/Joao4569/survey-data-capture-and-analyse/blob/main/README.md) project for the ReadMe format.
